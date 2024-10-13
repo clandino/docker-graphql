@@ -26,10 +26,14 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     - name: Build Docker Image
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
       run: |
         docker build -t $DOCKER_USER/docker-graphql:0.0.2 .
 
     - name: Push Docker Image
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
       run: |
         docker image push $DOCKER_USER/docker-graphql:0.0.2 .
 
